@@ -18,5 +18,8 @@ export class RecipeService {
 
  @Output() recipeWasSelected = new EventEmitter<Recipe>();
  
+ getRecipe(pos : number) {
+   return this.recipes[pos];
+ }
       
 }
