@@ -16,6 +16,11 @@ export class RecipeListComponent implements OnInit {
 
   ngOnInit() {
       this.recipes = this.recipeService.recipes;
+      this.recipeService.recipeFetched.subscribe(
+        ()=> {
+          this.recipes = this.recipeService.recipes;
+        }
+      );
   }
 
   onRecipeSelected(recipe: Recipe) {
@@ -24,6 +29,4 @@ export class RecipeListComponent implements OnInit {
   onNewRecipe() {
     this.router.navigate(['new'], {relativeTo : this.route});
   }
-
-  
 }

@@ -1,3 +1,4 @@
+import { Subject } from 'rxjs/Subject';
 import { Ingredient } from '../shared/ingredient.model';
 import { Output,EventEmitter } from '@angular/core';
 import { Recipe } from './recipe.model';
@@ -17,6 +18,8 @@ export class RecipeService {
       ];
 
  @Output() recipeWasSelected = new EventEmitter<Recipe>();
+ recipeFetched = new Subject();
+ 
  
  getRecipe(pos : number) {
    return this.recipes[pos];
@@ -33,4 +36,5 @@ export class RecipeService {
  deleteRecipe(index : number) {
     this.recipes.splice(index,1)
  }
+
 }
