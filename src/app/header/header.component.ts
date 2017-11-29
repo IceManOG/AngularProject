@@ -1,3 +1,4 @@
+import { AuthService } from './../auth/auth.service';
 import { HttpService } from '../http.service';
 import { Component, EventEmitter, Output } from '@angular/core';
 import { RecipeService } from '../recipes/recipe.service';
@@ -12,7 +13,7 @@ export class HeaderComponent {
 
 
 
-  constructor(private recipeService : RecipeService,private http : HttpService) {}
+  constructor(private recipeService : RecipeService,private http : HttpService, public authService: AuthService) {}
 
   onSaveData() {
     this.http.storeRecipe().subscribe(
@@ -22,5 +23,9 @@ export class HeaderComponent {
 
   onFetchData() {
     this.http.fetchRecipes();
+  }
+
+  onLogout() {
+    this.authService.logOut();
   }
 }

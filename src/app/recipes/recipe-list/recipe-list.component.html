@@ -10,7 +10,8 @@
       *ngFor="let recipeEl of recipes; let i = index"
       [recipe]="recipeEl"
       [index]="i"
-      (recipeSelected)="onRecipeSelected(recipeEl)"></app-recipe-item>
+      (recipeSelected)="onRecipeSelected(recipeEl)">
+    </app-recipe-item>
   </div>
 </div>
 
