@@ -1,4 +1,4 @@
-import { Subject } from 'rxjs/Rx';
+import { Subject } from 'rxjs/Subject';
 import { Ingredient } from './../shared/ingredient.model';
 import { RecipeService } from "./../recipes/recipe.service";
 import { Recipe } from "./../recipes/recipe.model";
@@ -10,7 +10,7 @@ export class ShoppingListService {
     new Ingredient("Apples", 5),
     new Ingredient("Tomatoes", 10)
   ];
-  startedEditing = new Subject<number>();
+  startedEditing: Subject<number> = new Subject<number>();
 
   onIngredientAdded(ingredient: Ingredient) {
     this.ingredients.push(ingredient);

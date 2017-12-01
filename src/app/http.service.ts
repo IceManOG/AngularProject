@@ -3,12 +3,13 @@ import { Injectable } from "@angular/core";
 import { Http,Response } from "@angular/http";
 import { RecipeService } from './recipes/recipe.service';
 import { AuthService } from './auth/auth.service';
-
+import 'rxjs/add/operator/map'
+import { HttpClient } from '@angular/common/http';
 
 @Injectable()
 export class HttpService {
 
-    constructor(private http : Http,private recipeService : RecipeService, private authService : AuthService) {}
+    constructor(private http : HttpClient,private recipeService : RecipeService, private authService : AuthService) {}
 
     storeRecipe() {
         const token = this.authService.getToken();        
@@ -17,10 +18,8 @@ export class HttpService {
 
     fetchRecipes() {
         const token = this.authService.getToken();
-        return this.http.get('https://ng-recipe-book-3d9fb.firebaseio.com/recipes.json?auth=' + token)
-        .map(
-            (response : Response) => {
-                const recipes : Recipe[] = response.json();
+        return this.http.get<Recipe[]>('https://ng-recipe-book-3d9fb.firebaseio.com/recipes.json?auth=' + token).map(
+            (recipes) => {
                 for(let recipe of recipes) {
                     if (!recipe['ingredients'])
                     recipe['ingredients'] =[];
